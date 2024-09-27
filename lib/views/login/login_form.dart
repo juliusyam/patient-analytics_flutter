@@ -49,6 +49,7 @@ class LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              obscureText: true,
               decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Password',
