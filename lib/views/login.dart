@@ -29,8 +29,14 @@ class LoginPage extends StatelessWidget {
                 style: Theme.of(context).textTheme.headlineMedium,
               ),
               ElevatedButton(
-                  onPressed: () {
-                    _apiService.login(LoginPayload('juliusyam_superadmin', 'GodSaveTheQueen123!'));
+                  onPressed: () async {
+                    final result = await _apiService.login(LoginPayload('juliusyam_superadmin', 'GodSaveTheQueen123!'));
+
+                    result.when((data) {
+                      user.updateUser(data.token);
+                    }, (error) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
+                    });
                   },
                   child: const Text('Hit Login API')),
               ElevatedButton(

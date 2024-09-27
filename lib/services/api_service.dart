@@ -1,6 +1,8 @@
 import 'dart:convert';
 
 import 'package:get/get.dart';
+import 'package:multiple_result/multiple_result.dart';
+import 'package:patient_analytics_flutter/models/api_exception.dart';
 import 'package:patient_analytics_flutter/models/auth/login_payload.dart';
 import 'package:patient_analytics_flutter/models/auth/login_response.dart';
 
@@ -21,22 +23,18 @@ class ApiService extends GetConnect {
     });
   }
 
-  Future<LoginResponse?> login(LoginPayload payload) async {
+  Future<Result<LoginResponse, ApiException>> login(LoginPayload payload) async {
     try {
       final response = await httpClient.post('/auth/login', body: payload.toJson());
 
       if (response.statusCode == 200) {
         final convertedBody = LoginResponse.fromJson(response.body);
-        print('Token: ${convertedBody.token}');
-        print('RefreshToken: ${convertedBody.token}');
-        return convertedBody;
+        return Success(convertedBody);
       } else {
-        throw Exception('Failed to convert');
+        return Error(ApiException(response.body));
       }
-
     } catch (e) {
-      print('API call failed: $e');
-      return null;
+      return Error(ApiException(e));
     }
   }
 }
