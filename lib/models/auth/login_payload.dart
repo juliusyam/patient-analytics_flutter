@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 class LoginPayload {
-  LoginPayload(this.username, this.password);
   String username = '';
   String password = '';
 
