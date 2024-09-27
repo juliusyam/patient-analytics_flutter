@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient_analytics_flutter/providers/user_provider.dart';
+import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:provider/provider.dart';
 
 class DashboardPage extends StatefulWidget {
@@ -11,6 +12,8 @@ class DashboardPage extends StatefulWidget {
 
 class _DashboardPageState extends State<DashboardPage> {
   int _counter = 0;
+
+  final ApiService _apiService = ApiService(token: 'token');
 
   void _incrementCounter() {
     setState(() {
