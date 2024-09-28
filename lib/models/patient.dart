@@ -22,14 +22,14 @@ class Patient {
   factory Patient.fromJson(Map<String, dynamic> responseBody) {
     return switch (responseBody) {
       {
-      'id': int id,
-      'doctorId': int doctorId,
-      'dateOfBirth': String dateOfBirth,
-      'gender': String gender,
-      'firstName': String? firstName,
-      'lastName': String? lastName,
-      'email': String email,
-      'address': String? address,
+        'id': int id,
+        'doctorId': int doctorId,
+        'dateOfBirth': String dateOfBirth,
+        'gender': String gender,
+        'firstName': String? firstName,
+        'lastName': String? lastName,
+        'email': String email,
+        'address': String? address,
       } =>
         Patient(
           id: id,
