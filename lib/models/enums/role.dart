@@ -1,5 +1,5 @@
 enum Role {
-  superAdmin,
+  superadmin,
   admin,
   doctor,
 }

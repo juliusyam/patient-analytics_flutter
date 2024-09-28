@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:patient_analytics_flutter/providers/user_provider.dart';
-import 'package:patient_analytics_flutter/views/dashboard.dart';
+import 'package:patient_analytics_flutter/views/dashboard/dashboard.dart';
 import 'package:patient_analytics_flutter/views/login/login.dart';
 import 'package:provider/provider.dart';
 
