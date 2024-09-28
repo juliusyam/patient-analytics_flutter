@@ -3,9 +3,9 @@ class PatientBloodPressure {
   final int patientId;
   final int doctorId;
   final DateTime dateCreated;
-  final double bloodPressureSystolic;
-  final double bloodPressureDiastolic;
-  final String status;
+  final int bloodPressureSystolic;
+  final int bloodPressureDiastolic;
+  final String? status;
 
   const PatientBloodPressure({
     required this.id,
@@ -24,9 +24,9 @@ class PatientBloodPressure {
         'patientId': int patientId,
         'doctorId': int doctorId,
         'dateCreated': String dateCreated,
-        'bloodPressureSystolic': double bloodPressureSystolic,
-        'bloodPressureDiastolic': double bloodPressureDiastolic,
-        'status': String status,
+        'bloodPressureSystolic': int bloodPressureSystolic,
+        'bloodPressureDiastolic': int bloodPressureDiastolic,
+        'status': String? status,
       } =>
         PatientBloodPressure(
           id: id,

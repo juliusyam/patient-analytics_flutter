@@ -5,6 +5,7 @@ import 'package:patient_analytics_flutter/models/api_exception.dart';
 import 'package:patient_analytics_flutter/models/auth/login_payload.dart';
 import 'package:patient_analytics_flutter/models/auth/login_response.dart';
 import 'package:patient_analytics_flutter/models/patient.dart';
+import 'package:patient_analytics_flutter/models/patient_with_metrics.dart';
 
 class ApiService extends GetConnect {
 
@@ -16,9 +17,7 @@ class ApiService extends GetConnect {
 
     httpClient.addRequestModifier<void>((request) async {
       String? token = box.read('token');
-      print("Token received: $token");
       if (token != null) {
-
         request.headers['Authorization'] = 'Bearer $token';
         request.headers['Content-Type'] = 'application/json';
       }
@@ -44,12 +43,24 @@ class ApiService extends GetConnect {
   Future<Result<List<Patient>, ApiException>> getPatients() async {
     try {
       final response = await httpClient.get('/patients');
-
-      print(response.statusCode);
-      print(response.body.toString());
       if (response.statusCode == 200) {
         final List list = response.body;
         final List<Patient> data = list.map((item) => Patient.fromJson(item)).toList();
+        return Success(data);
+      } else {
+        return Error(ApiException(response.body));
+      }
+    } catch (e) {
+      return Error(ApiException(e));
+    }
+  }
+
+  Future<Result<PatientWithMetrics, ApiException>> getPatientById(int patientId) async {
+    try {
+      final response = await httpClient.get('/patients/$patientId');
+      if (response.statusCode == 200) {
+        print(response.body);
+        final data = PatientWithMetrics.fromJson(response.body);
         return Success(data);
       } else {
         return Error(ApiException(response.body));
