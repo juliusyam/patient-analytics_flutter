@@ -14,13 +14,13 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UserProvider>(builder: (context, user, _) {
+    return Consumer<UserProvider>(builder: (context, userProvider, _) {
 
       Future<void> onSubmit(LoginPayload loginPayload) async {
         final result = await _apiService.login(loginPayload);
 
         result.when((data) {
-          user.updateUser(data.token);
+          userProvider.updateUser(data.token, data.refreshToken, data.user);
         }, (error) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
         });
