@@ -1,7 +1,11 @@
+import 'package:patient_analytics_flutter/extensions/string.dart';
+
+import 'enums/role.dart';
+
 class User {
   final int id;
   final String username;
-  final String role;
+  final Role role;
   final DateTime dateOfBirth;
   final String gender;
   final String? firstName;
@@ -37,7 +41,7 @@ class User {
         User(
           id: id,
           username: username,
-          role: role,
+          role: role.toEnum(),
           dateOfBirth: DateTime.parse(dateOfBirth),
           gender: gender,
           firstName: firstName,
