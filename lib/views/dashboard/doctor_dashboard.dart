@@ -23,8 +23,7 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
 
       print("Token: ${userProvider.token}");
 
-      final ApiService apiService =
-          Get.put(ApiService(token: userProvider.token));
+      final ApiService apiService = Get.put(ApiService());
 
       final result = await apiService.getPatients();
 

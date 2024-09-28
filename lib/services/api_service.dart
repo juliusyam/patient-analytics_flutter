@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:multiple_result/multiple_result.dart';
 import 'package:patient_analytics_flutter/models/api_exception.dart';
 import 'package:patient_analytics_flutter/models/auth/login_payload.dart';
@@ -6,14 +7,15 @@ import 'package:patient_analytics_flutter/models/auth/login_response.dart';
 import 'package:patient_analytics_flutter/models/patient.dart';
 
 class ApiService extends GetConnect {
-  final String? token;
-  ApiService({ required this.token });
+
+  final box = GetStorage();
 
   @override
   void onInit() {
     httpClient.baseUrl = 'http://localhost:8080/api';
 
     httpClient.addRequestModifier<void>((request) async {
+      String? token = box.read('token');
       print("Token received: $token");
       if (token != null) {
 

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:patient_analytics_flutter/extensions/string.dart';
 
 import 'enums/role.dart';
@@ -51,5 +53,19 @@ class User {
         ),
       _ => throw const FormatException('Failed to convert User'),
     };
+  }
+
+  String toJson() {
+    return jsonEncode({
+      'id': id,
+      'username': username,
+      'role': role.toShortString(),
+      'dateOfBirth': dateOfBirth.toIso8601String(),
+      'gender': gender,
+      'firstName': firstName,
+      'lastName': lastName,
+      'email': email,
+      'address': address,
+    });
   }
 }

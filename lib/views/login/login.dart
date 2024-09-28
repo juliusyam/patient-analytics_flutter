@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
 
-  final ApiService _apiService = Get.put(ApiService(token: null));
+  final ApiService _apiService = Get.put(ApiService());
 
   @override
   Widget build(BuildContext context) {

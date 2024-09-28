@@ -13,16 +13,29 @@ class DashboardPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
       switch (userProvider.user?.role) {
-        case Role.superadmin:
-        case Role.admin:
+        case Role.SuperAdmin:
+        case Role.Admin:
           return const AdminDashboardPage();
-        case Role.doctor:
+        case Role.Doctor:
           return ChangeNotifierProvider(
             create: (context) => DoctorDashboardProvider(),
             child: const DoctorDashboardPage(),
           );
         case null:
-          throw Exception('Role must be defined');
+          return Container(
+            color: Colors.cyan.shade50,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                const CircularProgressIndicator(),
+                const SizedBox(height: 20),
+                Text(
+                  'Fetching user details...',
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ],
+            ),
+          );
       }
     });
   }
