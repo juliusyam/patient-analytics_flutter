@@ -24,7 +24,8 @@ class PatientHero extends StatelessWidget {
                 style: const TextStyle(
                     color: Colors.black87,
                     fontWeight: FontWeight.bold,
-                    fontSize: 25),
+                    fontSize: 25,
+                ),
               ),
               Text(patient.email),
               Text(DateFormat('yyyy-MM-dd').format(patient.dateOfBirth))

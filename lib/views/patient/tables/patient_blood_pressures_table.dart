@@ -40,6 +40,7 @@ class PatientBloodPressuresTable extends StatelessWidget {
 
       return Hero(
         tag: 'patient-blood-pressures-table',
+        transitionOnUserGestures: true,
         child: Table(
           border: TableBorder.all(),
           columnWidths: const <int, TableColumnWidth>{

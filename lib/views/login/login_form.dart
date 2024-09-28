@@ -71,7 +71,7 @@ class LoginFormState extends State<LoginForm> {
                     widget.onSubmit(loginPayload);
                   }
                 },
-                child: const Text('Hit Login API')
+                child: const Text('Login')
             ),
           ],
         ),
