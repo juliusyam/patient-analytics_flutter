@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:patient_analytics_flutter/providers/user_provider.dart';
 
 class AdminDashboardPage extends StatelessWidget {
-  AdminDashboardPage({super.key});
+  const AdminDashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {

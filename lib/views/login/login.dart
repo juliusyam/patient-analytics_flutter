@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/models/auth/login_payload.dart';
 import 'package:patient_analytics_flutter/providers/user_provider.dart';
+import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/login/login_form.dart';
 import 'package:provider/provider.dart';
-import 'package:get/get.dart';
-
-import '../../services/api_service.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
