@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_blood_pressures.dart';
+import 'package:patient_analytics_flutter/views/patient/patient_edit.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_hero.dart';
 import 'package:patient_analytics_flutter/views/patient/tables/patient_blood_pressures_table.dart';
 import 'package:provider/provider.dart';
@@ -89,7 +90,7 @@ class PatientDetailsState extends State<PatientDetailsPage> {
                         Navigator.of(context).push(MaterialPageRoute(builder: (_) {
                           return ChangeNotifierProvider<PatientDetailsProvider>.value(
                             value: provider,
-                            child: PatientBloodPressuresPage(),
+                            child: const PatientBloodPressuresPage(),
                           );
                         }));
                       },
@@ -101,7 +102,14 @@ class PatientDetailsState extends State<PatientDetailsPage> {
           ],
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+              return ChangeNotifierProvider<PatientDetailsProvider>.value(
+                value: provider,
+                child: const PatientEditPage(),
+              );
+            }));
+          },
           shape: const CircleBorder(),
           tooltip: 'Edit',
           child: const Icon(CupertinoIcons.pencil),

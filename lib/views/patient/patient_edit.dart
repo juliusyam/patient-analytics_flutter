@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
-import 'package:patient_analytics_flutter/views/patient/tables/patient_blood_pressures_table.dart';
+import 'package:patient_analytics_flutter/views/patient/forms/patient_form.dart';
 import 'package:provider/provider.dart';
+import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 
-class PatientBloodPressuresPage extends StatelessWidget {
-  const PatientBloodPressuresPage({super.key});
+class PatientEditPage extends StatelessWidget {
+  const PatientEditPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +19,7 @@ class PatientBloodPressuresPage extends StatelessWidget {
                 '${provider.patient.firstName} ${provider.patient.lastName}',
               ),
               Text(
-                'Blood Pressure Records',
+                'Edit Patient Information',
                 style: TextStyle(
                   color: Colors.cyan.shade700,
                   fontWeight: FontWeight.bold,
@@ -28,14 +27,17 @@ class PatientBloodPressuresPage extends StatelessWidget {
                 ),
               ),
             ],
-          ),
+          )
         ),
-        body: PatientBloodPressuresTable(),
-        floatingActionButton: FloatingActionButton(
-          onPressed: () {},
-          shape: const CircleBorder(),
-          tooltip: 'Edit',
-          child: const Icon(CupertinoIcons.plus),
+        body: ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          primary: false,
+          children: <Widget>[
+            PatientForm(patient: provider.patient, onSubmit: (payload) {
+              print(payload.firstName);
+            })
+          ],
         ),
       );
     });
