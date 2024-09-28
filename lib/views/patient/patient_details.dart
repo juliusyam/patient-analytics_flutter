@@ -3,26 +3,28 @@ import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_hero.dart';
+import 'package:patient_analytics_flutter/views/patient/tables/patient_blood_pressures_table.dart';
 import 'package:provider/provider.dart';
 
 class PatientDetailsPage extends StatefulWidget {
   const PatientDetailsPage({super.key});
 
   @override
-  PatientDetailsState createState()=> PatientDetailsState();
+  PatientDetailsState createState() => PatientDetailsState();
 }
 
 class PatientDetailsState extends State<PatientDetailsPage> {
-
   @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final patientProvider = Provider.of<PatientDetailsProvider>(context, listen: false);
+      final patientProvider =
+          Provider.of<PatientDetailsProvider>(context, listen: false);
 
       final ApiService apiService = Get.put(ApiService());
 
-      final result = await apiService.getPatientById(patientProvider.patient.id);
+      final result =
+          await apiService.getPatientById(patientProvider.patient.id);
 
       result.when((data) {
         setState(() {
@@ -41,18 +43,20 @@ class PatientDetailsState extends State<PatientDetailsPage> {
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-          title: Text('${provider.patient.firstName} ${provider.patient.lastName}'),
+          title: Text(
+              '${provider.patient.firstName} ${provider.patient.lastName}'),
         ),
         body: Column(
-            children: <Widget>[
-              Container(
-                width: double.maxFinite,
-                padding: const EdgeInsets.all(10.0),
-                color: Colors.cyan.shade50,
-                child: PatientHero(patient: provider.patient),
-              ),
-              Text("Blood Pressures length: ${provider.bloodPressures.length}")
-            ],
+          children: <Widget>[
+            Container(
+              width: double.maxFinite,
+              padding: const EdgeInsets.all(10.0),
+              color: Colors.cyan.shade50,
+              child: PatientHero(patient: provider.patient),
+            ),
+            Text("Blood Pressures length: ${provider.bloodPressures.length}"),
+            PatientBloodPressuresTable(limit: 5),
+          ],
         ),
       );
     });
