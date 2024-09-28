@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
@@ -98,6 +99,12 @@ class PatientDetailsState extends State<PatientDetailsPage> {
               ),
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {},
+          shape: const CircleBorder(),
+          tooltip: 'Edit',
+          child: const Icon(CupertinoIcons.pencil),
         ),
       );
     });
