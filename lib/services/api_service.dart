@@ -5,6 +5,7 @@ import 'package:patient_analytics_flutter/models/api_exception.dart';
 import 'package:patient_analytics_flutter/models/auth/login_payload.dart';
 import 'package:patient_analytics_flutter/models/auth/login_response.dart';
 import 'package:patient_analytics_flutter/models/patient.dart';
+import 'package:patient_analytics_flutter/models/patient_payload.dart';
 import 'package:patient_analytics_flutter/models/patient_with_metrics.dart';
 
 class ApiService extends GetConnect {
@@ -61,6 +62,21 @@ class ApiService extends GetConnect {
       if (response.statusCode == 200) {
         print(response.body);
         final data = PatientWithMetrics.fromJson(response.body);
+        return Success(data);
+      } else {
+        return Error(ApiException(response.body));
+      }
+    } catch (e) {
+      return Error(ApiException(e));
+    }
+  }
+
+  Future<Result<Patient, ApiException>> editPatient(int patientId, PatientPayload payload) async {
+    try {
+      final response = await httpClient.put('/patients/$patientId', body: payload.toJson());
+
+      if (response.statusCode == 200) {
+        final data = Patient.fromJson(response.body);
         return Success(data);
       } else {
         return Error(ApiException(response.body));

@@ -14,5 +14,11 @@ class PatientDetailsProvider extends ChangeNotifier {
 
   void populateMetrics(List<PatientBloodPressure> bloodPressures) {
     _bloodPressures = bloodPressures;
+    notifyListeners();
+  }
+
+  void updatePatientDetails(Patient updatedPatient) {
+    patient = updatedPatient;
+    notifyListeners();
   }
 }

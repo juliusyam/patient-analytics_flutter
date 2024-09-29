@@ -1,14 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:patient_analytics_flutter/models/patient_payload.dart';
 import 'package:patient_analytics_flutter/views/patient/forms/patient_form.dart';
 import 'package:provider/provider.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
+import 'package:patient_analytics_flutter/services/api_service.dart';
 
 class PatientEditPage extends StatelessWidget {
-  const PatientEditPage({super.key});
+  PatientEditPage({super.key});
+
+  final ApiService apiService = Get.put(ApiService());
 
   @override
   Widget build(BuildContext context) {
     return Consumer<PatientDetailsProvider>(builder: (context, provider, _) {
+
+      Future<void> onSubmit(PatientPayload patientPayload) async {
+        final result = await apiService.editPatient(provider.patient.id, patientPayload);
+
+        result.when((data) {
+          provider.updatePatientDetails(data);
+          Navigator.pop(context);
+        }, (error) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error.toString())));
+        });
+      }
+
       return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
@@ -34,9 +51,7 @@ class PatientEditPage extends StatelessWidget {
           shrinkWrap: true,
           primary: false,
           children: <Widget>[
-            PatientForm(patient: provider.patient, onSubmit: (payload) {
-              print(payload.firstName);
-            })
+            PatientForm(patient: provider.patient, onSubmit: onSubmit)
           ],
         ),
       );
