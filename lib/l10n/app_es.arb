@@ -1,5 +1,10 @@
 {
-  "app_title": "Análisis de pacientes",
+  "title_app": "Análisis de pacientes",
+  "title_login": "Iniciar sesión",
+  "form_username_title": "Nombre de usuario",
+  "form_username_validation": "Ingrese el nombre de usuario",
+  "form_password_title": "Contraseña",
+  "form_password_validation": "Ingrese la contraseña",
   "form_firstName_title": "Nombre",
   "form_firstName_validation": "Ingrese su nombre",
   "form_lastName_title": "Apellido",
@@ -10,9 +15,10 @@
   "form_gender_title": "Género",
   "form_gender_validation": "Ingrese su género",
   "form_address_title": "Dirección",
-  "form_address_validation": "Ingrese su dirección",
+  "form_address_validation": "Por favor, introduzca su dirección",
   "form_dateOfBirth_title": "Fecha de nacimiento",
-  "form_dateOfBirth_validation": "Ingrese su fecha de nacimiento",
+  "form_dateOfBirth_validation": "Por favor, introduzca su fecha de nacimiento",
+  "button_login": "Iniciar sesión",
   "button_patient_create": "Crear paciente",
   "button_patient_update": "Actualizar paciente"
 }

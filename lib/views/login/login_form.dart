@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:patient_analytics_flutter/models/auth/login_payload.dart';
 
 class LoginForm extends StatefulWidget {
@@ -16,6 +17,9 @@ class LoginFormState extends State<LoginForm> {
 
   @override
   Widget build(BuildContext context) {
+
+    final localisations = AppLocalizations.of(context)!;
+
     return Form(
       key: formKey,
       child: Container(
@@ -30,19 +34,19 @@ class LoginFormState extends State<LoginForm> {
         ),
         child: Column(
           children: <Widget>[
-            const Text('Login'),
+            Text(localisations.title_login),
             const SizedBox(height: 10),
             TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Username',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: localisations.form_username_title,
               ),
               onChanged: (value) {
                 loginPayload.username = value;
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter username';
+                  return localisations.form_username_validation;
                 }
                 return null;
               },
@@ -50,16 +54,16 @@ class LoginFormState extends State<LoginForm> {
             const SizedBox(height: 10),
             TextFormField(
               obscureText: true,
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Password',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: localisations.form_password_title,
               ),
               onChanged: (value) {
                 loginPayload.password = value;
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter password';
+                  return localisations.form_password_validation;
                 }
                 return null;
               },
@@ -71,7 +75,7 @@ class LoginFormState extends State<LoginForm> {
                     widget.onSubmit(loginPayload);
                   }
                 },
-                child: const Text('Login')
+                child: Text(localisations.button_login)
             ),
           ],
         ),

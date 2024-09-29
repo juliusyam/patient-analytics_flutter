@@ -1,5 +1,10 @@
 {
-  "app_title": "Patient Analytics",
+  "title_app": "Patient Analytics",
+  "title_login": "Login",
+  "form_username_title": "Username",
+  "form_username_validation": "Please enter username",
+  "form_password_title": "Password",
+  "form_password_validation": "Please enter password",
   "form_firstName_title": "First Name",
   "form_firstName_validation": "Please enter your first name",
   "form_lastName_title": "Last Name",
@@ -13,6 +18,7 @@
   "form_address_validation": "Please enter your address",
   "form_dateOfBirth_title": "Date of Birth",
   "form_dateOfBirth_validation": "Please enter your date of birth",
+  "button_login": "Login",
   "button_patient_create": "Create Patient",
   "button_patient_update": "Update Patient"
 }
