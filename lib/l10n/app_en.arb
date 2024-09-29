@@ -1,0 +1,18 @@
+{
+  "app_title": "Patient Analytics",
+  "form_firstName_title": "First Name",
+  "form_firstName_validation": "Please enter your first name",
+  "form_lastName_title": "Last Name",
+  "form_lastName_validation": "Please enter your last name",
+  "form_email_title": "Email",
+  "form_email_validation": "Please enter your email address",
+  "form_email_validation_format": "Please enter a valid email address",
+  "form_gender_title": "Gender",
+  "form_gender_validation": "Please enter your gender",
+  "form_address_title": "Address",
+  "form_address_validation": "Please enter your address",
+  "form_dateOfBirth_title": "Date of Birth",
+  "form_dateOfBirth_validation": "Please enter your date of birth",
+  "button_patient_create": "Create Patient",
+  "button_patient_update": "Update Patient"
+}

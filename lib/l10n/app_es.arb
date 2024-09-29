@@ -1,0 +1,18 @@
+{
+  "app_title": "Análisis de pacientes",
+  "form_firstName_title": "Nombre",
+  "form_firstName_validation": "Ingrese su nombre",
+  "form_lastName_title": "Apellido",
+  "form_lastName_validation": "Ingrese su apellido",
+  "form_email_title": "Correo electrónico",
+  "form_email_validation": "Ingrese su dirección de correo electrónico",
+  "form_email_validation_format": "Ingrese una dirección de correo electrónico válida",
+  "form_gender_title": "Género",
+  "form_gender_validation": "Ingrese su género",
+  "form_address_title": "Dirección",
+  "form_address_validation": "Ingrese su dirección",
+  "form_dateOfBirth_title": "Fecha de nacimiento",
+  "form_dateOfBirth_validation": "Ingrese su fecha de nacimiento",
+  "button_patient_create": "Crear paciente",
+  "button_patient_update": "Actualizar paciente"
+}

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:patient_analytics_flutter/providers/user_provider.dart';
 import 'package:patient_analytics_flutter/views/dashboard/dashboard.dart';
@@ -11,13 +13,25 @@ void main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
-      child: const MyApp(),
+      child: MyApp(),
     ),
   );
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final localizationsDelegates = [
+    AppLocalizations.delegate,
+    GlobalMaterialLocalizations.delegate,
+    GlobalWidgetsLocalizations.delegate,
+    GlobalCupertinoLocalizations.delegate,
+  ];
+
+  final supportedLocales = [
+    const Locale('en'),
+    const Locale('es'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +44,8 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
               useMaterial3: true,
             ),
+            localizationsDelegates: localizationsDelegates,
+            supportedLocales: supportedLocales,
             home: const DashboardPage(),
           );
         } else {
@@ -39,6 +55,8 @@ class MyApp extends StatelessWidget {
               colorScheme: ColorScheme.fromSeed(seedColor: Colors.cyan),
               useMaterial3: true,
             ),
+            localizationsDelegates: localizationsDelegates,
+            supportedLocales: supportedLocales,
             home: LoginPage(),
           );
         }

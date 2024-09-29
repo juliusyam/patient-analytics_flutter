@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:patient_analytics_flutter/extensions/string.dart';
 import 'package:patient_analytics_flutter/models/patient.dart';
 import 'package:patient_analytics_flutter/models/patient_payload.dart';
@@ -20,6 +21,8 @@ class PatientFormState extends State<PatientForm> {
   Widget build(BuildContext context) {
     final patientPayload = PatientPayload(patient: widget.patient);
 
+    final localisations = AppLocalizations.of(context)!;
+
     return Form(
       key: formKey,
       child: Container(
@@ -27,9 +30,9 @@ class PatientFormState extends State<PatientForm> {
         child: Column(
           children: <Widget>[
             TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'First Name',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: localisations.form_firstName_title,
               ),
               initialValue: patientPayload.firstName,
               onChanged: (value) {
@@ -37,16 +40,16 @@ class PatientFormState extends State<PatientForm> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter first name';
+                  return localisations.form_firstName_validation;
                 }
                 return null;
               },
             ),
             const SizedBox(height: 10),
             TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Last Name',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: localisations.form_lastName_title,
               ),
               initialValue: patientPayload.lastName,
               onChanged: (value) {
@@ -54,16 +57,16 @@ class PatientFormState extends State<PatientForm> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter last name';
+                  return localisations.form_lastName_validation;
                 }
                 return null;
               },
             ),
             const SizedBox(height: 10),
             TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Email',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: localisations.form_email_title,
               ),
               initialValue: patientPayload.email,
               onChanged: (value) {
@@ -71,18 +74,18 @@ class PatientFormState extends State<PatientForm> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter email';
+                  return localisations.form_email_validation;
                 } else if (!value.isValidEmail()) {
-                  return 'Please enter a valid email address';
+                  return localisations.form_email_validation_format;
                 }
                 return null;
               },
             ),
             const SizedBox(height: 10),
             TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Gender',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: localisations.form_gender_title,
               ),
               initialValue: patientPayload.gender,
               onChanged: (value) {
@@ -90,16 +93,16 @@ class PatientFormState extends State<PatientForm> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter gender';
+                  return localisations.form_gender_validation;
                 }
                 return null;
               },
             ),
             const SizedBox(height: 10),
             TextFormField(
-              decoration: const InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Address',
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(),
+                labelText: localisations.form_address_title,
               ),
               initialValue: patientPayload.address,
               onChanged: (value) {
@@ -107,14 +110,14 @@ class PatientFormState extends State<PatientForm> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Please enter address';
+                  return localisations.form_address_validation;
                 }
                 return null;
               },
             ),
             const SizedBox(height: 10),
             InputDatePickerFormField(
-              fieldLabelText: 'Date of Birth',
+              fieldLabelText: localisations.form_dateOfBirth_title,
               initialDate: patientPayload.dateOfBirth,
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
@@ -127,7 +130,9 @@ class PatientFormState extends State<PatientForm> {
                 }
               },
               child: Text(
-                (widget.patient != null) ? 'Update Patient' : 'Create Patient',
+                (widget.patient != null)
+                    ? localisations.button_patient_update
+                    : localisations.button_patient_create,
               ),
             ),
           ],

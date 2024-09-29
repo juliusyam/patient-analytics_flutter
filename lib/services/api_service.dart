@@ -14,7 +14,7 @@ class ApiService extends GetConnect {
 
   @override
   void onInit() {
-    // For iOS: Use 'http://localhost:8080/api';
+    // For iOS / Web: Use 'http://localhost:8080/api';
     // For Android: use 'http://10.0.2.2:8080/api';
     httpClient.baseUrl = 'http://localhost:8080/api';
 
