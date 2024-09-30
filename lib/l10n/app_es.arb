@@ -18,7 +18,14 @@
   "form_address_validation": "Por favor, introduzca su dirección",
   "form_dateOfBirth_title": "Fecha de nacimiento",
   "form_dateOfBirth_validation": "Por favor, introduzca su fecha de nacimiento",
+  "form_systolic_title": "Sistólica",
+  "form_systolic_validation": "Por favor, proporcione un valor sistólico para la presión arterial",
+  "form_diastolic_title": "Diastólica",
+  "form_diastolic_validation": "Por favor, proporcione un valor diastólico para la presión arterial",
+  "form_numeric_validation": "Por favor proporcione un valor numérico",
   "button_login": "Iniciar sesión",
   "button_patient_create": "Crear paciente",
-  "button_patient_update": "Actualizar paciente"
+  "button_patient_update": "Actualizar paciente",
+  "button_reading_add": "Añadir lectura",
+  "button_close": "Cerrar"
 }

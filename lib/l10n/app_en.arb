@@ -18,7 +18,14 @@
   "form_address_validation": "Please enter your address",
   "form_dateOfBirth_title": "Date of Birth",
   "form_dateOfBirth_validation": "Please enter your date of birth",
+  "form_systolic_title": "Systolic",
+  "form_systolic_validation": "Please provide a Systolic value for Blood Pressure",
+  "form_diastolic_title": "Diastolic",
+  "form_diastolic_validation": "Please provide a Diastolic value for Blood Pressure",
+  "form_numeric_validation": "Please provide a number value",
   "button_login": "Login",
   "button_patient_create": "Create Patient",
-  "button_patient_update": "Update Patient"
+  "button_patient_update": "Update Patient",
+  "button_reading_add": "Add Reading",
+  "button_close": "Close"
 }

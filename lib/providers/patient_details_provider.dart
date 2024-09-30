@@ -17,6 +17,11 @@ class PatientDetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addBloodPressureEntry(PatientBloodPressure entry) {
+    _bloodPressures.add(entry);
+    notifyListeners();
+  }
+
   void updatePatientDetails(Patient updatedPatient) {
     patient = updatedPatient;
     notifyListeners();
