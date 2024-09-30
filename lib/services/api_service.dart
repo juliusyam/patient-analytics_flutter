@@ -73,6 +73,21 @@ class ApiService extends GetConnect {
     }
   }
 
+  Future<Result<Patient, ApiException>> createPatient(PatientPayload payload) async {
+    try {
+      final response = await httpClient.post('/patients', body: payload.toJson());
+
+      if (response.statusCode == 200) {
+        final data = Patient.fromJson(response.body);
+        return Success(data);
+      } else {
+        return Error(ApiException(response.body));
+      }
+    } catch (e) {
+      return Error(ApiException(e));
+    }
+  }
+
   Future<Result<Patient, ApiException>> editPatient(int patientId, PatientPayload payload) async {
     try {
       final response = await httpClient.put('/patients/$patientId', body: payload.toJson());

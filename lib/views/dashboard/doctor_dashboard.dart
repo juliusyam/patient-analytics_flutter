@@ -1,9 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/providers/doctor_dashboard_provider.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/providers/user_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
+import 'package:patient_analytics_flutter/views/patient/patient_create.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_details.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_hero.dart';
 import 'package:provider/provider.dart';
@@ -42,7 +44,7 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     final doctorDashboardProvider =
-        Provider.of<DoctorDashboardProvider>(context, listen: false);
+        Provider.of<DoctorDashboardProvider>(context);
 
     List<Widget> patientWidgets = [];
     for (var patient in doctorDashboardProvider.patients) {
@@ -102,6 +104,19 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
             ),
           ),
         ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(builder: (_) {
+            return ChangeNotifierProvider<DoctorDashboardProvider>.value(
+              value: doctorDashboardProvider,
+              child: const PatientCreatePage(),
+            );
+          }));
+        },
+        shape: const CircleBorder(),
+        tooltip: 'Create Patient',
+        child: const Icon(CupertinoIcons.plus),
       ),
     );
   }

@@ -8,5 +8,11 @@ class DoctorDashboardProvider extends ChangeNotifier {
 
   void populatePatients(List<Patient> patients) {
     _patients = patients;
+    notifyListeners();
+  }
+
+  void addPatient(Patient patient) {
+    _patients.add(patient);
+    notifyListeners();
   }
 }

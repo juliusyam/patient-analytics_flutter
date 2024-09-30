@@ -106,12 +106,12 @@ class PatientDetailsState extends State<PatientDetailsPage> {
             Navigator.of(context).push(MaterialPageRoute(builder: (_) {
               return ChangeNotifierProvider<PatientDetailsProvider>.value(
                 value: provider,
-                child: PatientEditPage(),
+                child: const PatientEditPage(),
               );
             }));
           },
           shape: const CircleBorder(),
-          tooltip: 'Edit',
+          tooltip: 'Edit Patient',
           child: const Icon(CupertinoIcons.pencil),
         ),
       );
