@@ -15,4 +15,13 @@ class DoctorDashboardProvider extends ChangeNotifier {
     _patients.add(patient);
     notifyListeners();
   }
+
+  void updatePatient(Patient patient) {
+    var index = _patients.indexWhere((p) => p.id == patient.id);
+
+    if (index >= 0) {
+      _patients[index] = patient;
+      notifyListeners();
+    }
+  }
 }

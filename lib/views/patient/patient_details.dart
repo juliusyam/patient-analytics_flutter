@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:patient_analytics_flutter/providers/doctor_dashboard_provider.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_blood_pressures.dart';
@@ -42,6 +43,9 @@ class PatientDetailsState extends State<PatientDetailsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final doctorDashboardProvider =
+        Provider.of<DoctorDashboardProvider>(context, listen: false);
+
     return Consumer<PatientDetailsProvider>(builder: (context, provider, _) {
       return Scaffold(
         appBar: AppBar(
@@ -87,15 +91,16 @@ class PatientDetailsState extends State<PatientDetailsPage> {
                   PatientBloodPressuresTable(limit: 5),
                   ElevatedButton(
                       onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-                          return ChangeNotifierProvider<PatientDetailsProvider>.value(
+                        Navigator.of(context)
+                            .push(MaterialPageRoute(builder: (_) {
+                          return ChangeNotifierProvider<
+                              PatientDetailsProvider>.value(
                             value: provider,
                             child: const PatientBloodPressuresPage(),
                           );
                         }));
                       },
-                      child: const Text('View more')
-                  ),
+                      child: const Text('View more')),
                 ],
               ),
             ),
@@ -106,7 +111,10 @@ class PatientDetailsState extends State<PatientDetailsPage> {
             Navigator.of(context).push(MaterialPageRoute(builder: (_) {
               return ChangeNotifierProvider<PatientDetailsProvider>.value(
                 value: provider,
-                child: const PatientEditPage(),
+                child: ChangeNotifierProvider<DoctorDashboardProvider>.value(
+                  value: doctorDashboardProvider,
+                  child: const PatientEditPage(),
+                ),
               );
             }));
           },

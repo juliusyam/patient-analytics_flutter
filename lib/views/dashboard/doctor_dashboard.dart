@@ -65,9 +65,12 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
           patient: patient,
           onTap: () {
             Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-              return ChangeNotifierProvider(
-                create: (_) => PatientDetailsProvider(patient: patient),
-                child: const PatientDetailsPage(),
+              return ChangeNotifierProvider<DoctorDashboardProvider>.value(
+                value: doctorDashboardProvider,
+                child: ChangeNotifierProvider(
+                  create: (_) => PatientDetailsProvider(patient: patient),
+                  child: const PatientDetailsPage(),
+                ),
               );
             }));
           },
