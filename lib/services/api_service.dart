@@ -67,7 +67,6 @@ class ApiService extends GetConnect {
     try {
       final response = await httpClient.get('/patients/$patientId');
       if (response.statusCode == 200) {
-        print(response.body);
         final data = PatientWithMetrics.fromJson(response.body);
         return Success(data);
       } else {
