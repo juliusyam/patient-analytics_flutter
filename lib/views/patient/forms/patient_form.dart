@@ -121,6 +121,10 @@ class PatientFormState extends State<PatientForm> {
               initialDate: patientPayload.dateOfBirth,
               firstDate: DateTime(1900),
               lastDate: DateTime.now(),
+              onDateSubmitted: (value) {
+                // TODO: Implement Date Picker, this does not get called
+                patientPayload.dateOfBirth = value;
+              },
             ),
             const SizedBox(height: 10),
             ElevatedButton(
