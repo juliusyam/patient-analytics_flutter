@@ -23,6 +23,8 @@
   "form_diastolic_title": "Diastolic",
   "form_diastolic_validation": "Please provide a Diastolic value for Blood Pressure",
   "form_numeric_validation": "Please provide a number value",
+  "form_numeric_validation_min": "Value must be larger than {number}",
+  "form_numeric_validation_max": "Value must be smaller than {number}",
   "button_login": "Login",
   "button_patient_create": "Create Patient",
   "button_patient_update": "Update Patient",
