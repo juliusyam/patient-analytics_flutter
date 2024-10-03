@@ -1,28 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure_payload.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/forms/patient_blood_pressure_form.dart';
 import 'package:patient_analytics_flutter/views/patient/tables/patient_blood_pressures_table.dart';
-import 'package:provider/provider.dart';
 
 class PatientBloodPressuresPage extends StatelessWidget {
-  const PatientBloodPressuresPage({super.key});
+  const PatientBloodPressuresPage({super.key, required this.id});
+
+  final String id;
+
 
   @override
   Widget build(BuildContext context) {
     final localisations = AppLocalizations.of(context)!;
 
-    final provider = Provider.of<PatientDetailsProvider>(context);
+    final provider = context.watch<PatientDetailsProvider>();
 
     final ApiService apiService = Get.put(ApiService());
 
     void onSubmit(PatientBloodPressurePayload payload) async {
       final result = await apiService.addPatientBloodPressure(
-          provider.patient.id, payload);
+          int.parse(id), payload);
 
       result.when((data) {
         provider.addBloodPressureEntry(data);
@@ -78,7 +81,7 @@ class PatientBloodPressuresPage extends StatelessWidget {
           ],
         ),
       ),
-      body: PatientBloodPressuresTable(),
+      body: PatientBloodPressuresTable(entries: provider.bloodPressures),
       floatingActionButton: FloatingActionButton(
         onPressed: revealEntryForm,
         shape: const CircleBorder(),

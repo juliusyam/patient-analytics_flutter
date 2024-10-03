@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get_storage/get_storage.dart';
-
-import '../models/user.dart';
+import 'package:patient_analytics_flutter/models/enums/role.dart';
+import 'package:patient_analytics_flutter/models/user.dart';
 
 class UserProvider extends ChangeNotifier {
   final box = GetStorage();
@@ -36,6 +37,7 @@ class UserProvider extends ChangeNotifier {
     _user = user;
     box.write('user_string', user.toJson());
 
+    _redirectUser();
     notifyListeners();
   }
 
@@ -49,6 +51,22 @@ class UserProvider extends ChangeNotifier {
     _user = null;
     box.remove('user_string');
 
+    _redirectUser();
     notifyListeners();
+  }
+
+  void _redirectUser() {
+
+    if (_user?.role != null) {
+      switch (_user!.role) {
+        case Role.SuperAdmin:
+        case Role.Admin:
+          Modular.to.navigate('/admin-dashboard');
+        case Role.Doctor:
+          Modular.to.navigate('/doctor-dashboard');
+      }
+    } else {
+      Modular.to.navigate('/');
+    }
   }
 }

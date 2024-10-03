@@ -1,14 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/providers/doctor_dashboard_provider.dart';
-import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/providers/user_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
-import 'package:patient_analytics_flutter/views/patient/patient_create.dart';
-import 'package:patient_analytics_flutter/views/patient/patient_details.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_hero.dart';
-import 'package:provider/provider.dart';
 
 class DoctorDashboardPage extends StatefulWidget {
   const DoctorDashboardPage({super.key});
@@ -22,8 +19,7 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
   void initState() {
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) async {
-      final doctorDashboardProvider =
-          Provider.of<DoctorDashboardProvider>(context, listen: false);
+      final doctorDashboardProvider = context.watch<DoctorDashboardProvider>();
 
       final ApiService apiService = Get.put(ApiService());
 
@@ -42,9 +38,8 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
 
   @override
   Widget build(BuildContext context) {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
-    final doctorDashboardProvider =
-        Provider.of<DoctorDashboardProvider>(context);
+    final userProvider = context.watch<UserProvider>();
+    final doctorDashboardProvider = context.watch<DoctorDashboardProvider>();
 
     List<Widget> patientWidgets = [];
     for (var patient in doctorDashboardProvider.patients) {
@@ -58,21 +53,14 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
           color: Colors.cyan.shade50,
           boxShadow: const [
             BoxShadow(
-                spreadRadius: 0.05, blurRadius: 7.0, color: Colors.white70)
+                spreadRadius: 0.05, blurRadius: 7.0, color: Colors.white70),
           ],
         ),
         child: PatientHero(
           patient: patient,
           onTap: () {
-            Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-              return ChangeNotifierProvider<DoctorDashboardProvider>.value(
-                value: doctorDashboardProvider,
-                child: ChangeNotifierProvider(
-                  create: (_) => PatientDetailsProvider(patient: patient),
-                  child: const PatientDetailsPage(),
-                ),
-              );
-            }));
+            // TODO: Pass patient into PatientDetailsProvider
+            Modular.to.pushNamed('/doctor-dashboard/patient/${patient.id}');
           },
         ),
       ));
@@ -110,12 +98,7 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-            return ChangeNotifierProvider<DoctorDashboardProvider>.value(
-              value: doctorDashboardProvider,
-              child: const PatientCreatePage(),
-            );
-          }));
+          Modular.to.pushNamed('/doctor-dashboard/create-patient');
         },
         shape: const CircleBorder(),
         tooltip: 'Create Patient',

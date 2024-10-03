@@ -1,15 +1,20 @@
-
 import 'package:flutter/material.dart';
 import 'package:patient_analytics_flutter/models/patient.dart';
 import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure.dart';
 
 class PatientDetailsProvider extends ChangeNotifier {
-  PatientDetailsProvider({required this.patient});
+  PatientDetailsProvider();
 
-  // TODO: Check if this value should be final
-  Patient patient;
+  Patient? _patient;
+
+  Patient? get patientOrNull => _patient;
+
+  Patient get patient => (_patient != null)
+      ? _patient!
+      : throw const FormatException('Patient is not defined');
 
   List<PatientBloodPressure> _bloodPressures = [];
+
   List<PatientBloodPressure> get bloodPressures => _bloodPressures;
 
   void populateMetrics(List<PatientBloodPressure> bloodPressures) {
@@ -23,7 +28,7 @@ class PatientDetailsProvider extends ChangeNotifier {
   }
 
   void updatePatientDetails(Patient updatedPatient) {
-    patient = updatedPatient;
+    _patient = updatedPatient;
     notifyListeners();
   }
 }

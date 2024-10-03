@@ -6,6 +6,7 @@ import 'package:patient_analytics_flutter/views/form/integer_form_field.dart';
 class PatientBloodPressureForm extends StatefulWidget {
   const PatientBloodPressureForm({super.key, required this.onSubmit});
 
+  // TODO: Check bug on Android sending 0, 0
   final ValueChanged<PatientBloodPressurePayload> onSubmit;
 
   @override

@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/models/patient_payload.dart';
 import 'package:patient_analytics_flutter/providers/doctor_dashboard_provider.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/forms/patient_form.dart';
-import 'package:provider/provider.dart';
 
 class PatientEditPage extends StatelessWidget {
-  const PatientEditPage({super.key});
+  const PatientEditPage({super.key, required this.id});
+
+  final String id;
 
   @override
   Widget build(BuildContext context) {
     final ApiService apiService = Get.put(ApiService());
 
-    final patientDetailsProvider =
-        Provider.of<PatientDetailsProvider>(context, listen: false);
+    final patientDetailsProvider = context.watch<PatientDetailsProvider>();
 
-    final doctorDashboardProvider =
-        Provider.of<DoctorDashboardProvider>(context, listen: false);
+    final doctorDashboardProvider = context.watch<DoctorDashboardProvider>();
 
     Future<void> onSubmit(PatientPayload patientPayload) async {
       final result =
-          await apiService.editPatient(patientDetailsProvider.patient.id, patientPayload);
+          await apiService.editPatient(int.parse(id), patientPayload);
 
       result.when((data) {
         patientDetailsProvider.updatePatientDetails(data);
@@ -59,7 +59,9 @@ class PatientEditPage extends StatelessWidget {
         primary: false,
         children: <Widget>[
           PatientForm(
-              patient: patientDetailsProvider.patient, onSubmit: onSubmit)
+            patient: patientDetailsProvider.patient,
+            onSubmit: onSubmit,
+          ),
         ],
       ),
     );
