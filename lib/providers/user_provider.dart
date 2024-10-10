@@ -52,7 +52,6 @@ class UserProvider extends ChangeNotifier {
     box.remove('user_string');
 
     _redirectUser();
-    notifyListeners();
   }
 
   void _redirectUser() {
