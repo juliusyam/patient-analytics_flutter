@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_fetch_container.dart';
@@ -48,7 +49,9 @@ class PatientDetailsState extends State<PatientDetailsPage> {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         title: Text(
-            '${patientDetailsProvider.patientOrNull?.firstName} ${patientDetailsProvider.patientOrNull?.lastName}'),
+          '${patientDetailsProvider.patientOrNull?.firstName} ${patientDetailsProvider.patientOrNull?.lastName}',
+          style: context.title.navHeader,
+        ),
       ),
       body: PatientFetchContainer(
         provider: patientDetailsProvider,
@@ -61,8 +64,6 @@ class PatientDetailsState extends State<PatientDetailsPage> {
                 color: Colors.cyan.shade50,
                 child: PatientHero(patient: patient),
               ),
-              Text(
-                  'Blood Pressures length: ${patientDetailsProvider.bloodPressures.length}'),
               Container(
                 padding: const EdgeInsets.all(10.0),
                 margin: const EdgeInsets.all(10.0),
@@ -83,11 +84,7 @@ class PatientDetailsState extends State<PatientDetailsPage> {
                   children: <Widget>[
                     Text(
                       'Blood Pressure Records',
-                      style: TextStyle(
-                        color: Colors.cyan.shade700,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                      ),
+                      style: context.title.secondary,
                     ),
                     PatientBloodPressuresTable(
                       entries: patientDetailsProvider.bloodPressures,

@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure_payload.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
@@ -64,21 +65,21 @@ class PatientBloodPressuresPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              '${provider.patient.firstName} ${provider.patient.lastName}',
-            ),
-            Text(
-              'Blood Pressure Records',
-              style: TextStyle(
-                color: Colors.cyan.shade700,
-                fontWeight: FontWeight.bold,
-                fontSize: 20,
+        title: SizedBox(
+          width: double.maxFinite,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(
+                '${provider.patient.firstName} ${provider.patient.lastName}',
+                style: context.title.navHeader,
               ),
-            ),
-          ],
+              Text(
+                'Blood Pressure Records',
+                style: context.title.navSecondary,
+              ),
+            ],
+          ),
         ),
       ),
       body: PatientBloodPressuresTable(entries: provider.bloodPressures),

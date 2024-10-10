@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 import 'package:patient_analytics_flutter/models/patient.dart';
 
 class PatientHero extends StatelessWidget {
@@ -21,14 +22,14 @@ class PatientHero extends StatelessWidget {
             children: <Widget>[
               Text(
                 '${patient.firstName} ${patient.lastName}',
-                style: const TextStyle(
-                    color: Colors.black87,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 25,
-                ),
+                style: context.title.primary,
               ),
-              Text(patient.email),
-              Text(DateFormat('yyyy-MM-dd').format(patient.dateOfBirth))
+              Text(patient.email, style: context.body.large),
+              Text(
+                DateFormat('yyyy-MM-dd').format(patient.dateOfBirth),
+                style: context.body.regular,
+              ),
+              Text(patient.gender, style: context.body.small),
             ],
           ),
         ),

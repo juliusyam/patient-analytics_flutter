@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 import 'package:patient_analytics_flutter/models/auth/login_payload.dart';
 
 class LoginForm extends StatefulWidget {
@@ -34,9 +35,10 @@ class LoginFormState extends State<LoginForm> {
         ),
         child: Column(
           children: <Widget>[
-            Text(localisations.title_login),
+            Text(localisations.title_login, style: context.title.secondary),
             const SizedBox(height: 10),
             TextFormField(
+              style: context.body.regular,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: localisations.form_username_title,
@@ -53,6 +55,7 @@ class LoginFormState extends State<LoginForm> {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              style: context.body.regular,
               obscureText: true,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 import 'package:patient_analytics_flutter/providers/doctor_dashboard_provider.dart';
 import 'package:patient_analytics_flutter/providers/user_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
@@ -69,7 +70,7 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: const Text('Doctor Dashboard'),
+        title: Text('Doctor Dashboard', style: context.title.navHeader),
       ),
       body: Flex(
         direction: Axis.vertical,

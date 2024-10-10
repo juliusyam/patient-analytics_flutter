@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:patient_analytics_flutter/extensions/string.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 import 'package:patient_analytics_flutter/models/patient.dart';
 import 'package:patient_analytics_flutter/models/patient_payload.dart';
 
@@ -30,6 +31,7 @@ class PatientFormState extends State<PatientForm> {
         child: Column(
           children: <Widget>[
             TextFormField(
+              style: context.body.regular,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: localisations.form_firstName_title,
@@ -47,6 +49,7 @@ class PatientFormState extends State<PatientForm> {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              style: context.body.regular,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: localisations.form_lastName_title,
@@ -64,6 +67,7 @@ class PatientFormState extends State<PatientForm> {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              style: context.body.regular,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: localisations.form_email_title,
@@ -83,6 +87,7 @@ class PatientFormState extends State<PatientForm> {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              style: context.body.regular,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: localisations.form_gender_title,
@@ -100,6 +105,7 @@ class PatientFormState extends State<PatientForm> {
             ),
             const SizedBox(height: 10),
             TextFormField(
+              style: context.body.regular,
               decoration: InputDecoration(
                 border: const OutlineInputBorder(),
                 labelText: localisations.form_address_title,
@@ -116,6 +122,7 @@ class PatientFormState extends State<PatientForm> {
               },
             ),
             const SizedBox(height: 10),
+            // TODO: Replace with Date Picker
             InputDatePickerFormField(
               fieldLabelText: localisations.form_dateOfBirth_title,
               initialDate: patientPayload.dateOfBirth,

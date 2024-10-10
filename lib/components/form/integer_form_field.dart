@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 
 class IntegerFormField extends StatelessWidget {
   const IntegerFormField({
@@ -25,6 +26,7 @@ class IntegerFormField extends StatelessWidget {
     final localisations = AppLocalizations.of(context)!;
 
     return TextFormField(
+      style: context.body.regular,
       keyboardType: TextInputType.number,
       inputFormatters: [
         FilteringTextInputFormatter.allow(RegExp(r'^-?[0-9]*')),

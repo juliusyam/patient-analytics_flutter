@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:intl/intl.dart';
+import 'package:patient_analytics_flutter/components/table/table_cell_container.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure.dart';
 
 class PatientBloodPressuresTable extends StatelessWidget {
@@ -11,25 +13,36 @@ class PatientBloodPressuresTable extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Iterable<PatientBloodPressure> finalizedEntries = (limit != null)
-        ? entries.take(limit!)
-        : entries;
+    Iterable<PatientBloodPressure> finalizedEntries =
+        (limit != null) ? entries.take(limit!) : entries;
 
     List<TableRow> bloodPressureWidgets = [];
     for (var entry in finalizedEntries) {
       bloodPressureWidgets.add(
-        TableRow(children: <Container>[
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(DateFormat('yyyy-MM-dd').format(entry.dateCreated)),
+        TableRow(children: <TableCellContainer>[
+          TableCellContainer(
+            child: Text(
+              DateFormat('yyyy-MM-dd').format(entry.dateCreated),
+              style: context.body.regular,
+            ),
           ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(entry.bloodPressureSystolic.toString()),
+          TableCellContainer(
+            child: Text(
+              entry.bloodPressureSystolic.toString(),
+              style: context.body.regular,
+            ),
           ),
-          Container(
-            padding: const EdgeInsets.all(5.0),
-            child: Text(entry.bloodPressureDiastolic.toString()),
+          TableCellContainer(
+            child: Text(
+              entry.bloodPressureDiastolic.toString(),
+              style: context.body.regular,
+            ),
+          ),
+          TableCellContainer(
+            child: Text(
+              entry.status,
+              style: context.body.regular,
+            ),
           ),
         ]),
       );
@@ -44,19 +57,23 @@ class PatientBloodPressuresTable extends StatelessWidget {
           0: FlexColumnWidth(2),
           1: FlexColumnWidth(1),
           2: FlexColumnWidth(1),
+          3: FlexColumnWidth(2),
         },
         defaultVerticalAlignment: TableCellVerticalAlignment.middle,
         children: <TableRow>[
-          TableRow(children: <Container>[
-            Container(
-                padding: const EdgeInsets.all(5.0),
-                child: const Text('Date Created')),
-            Container(
-                padding: const EdgeInsets.all(5.0),
-                child: const Text('Systolic')),
-            Container(
-                padding: const EdgeInsets.all(5.0),
-                child: const Text('Diastolic')),
+          TableRow(children: <TableCellContainer>[
+            TableCellContainer(
+              child: Text('Date Created', style: context.body.regular),
+            ),
+            TableCellContainer(
+              child: Text('SYS', style: context.body.regular),
+            ),
+            TableCellContainer(
+              child: Text('DIA', style: context.body.regular),
+            ),
+            TableCellContainer(
+              child: Text('Status', style: context.body.regular),
+            ),
           ]),
           ...bloodPressureWidgets,
         ],

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure_payload.dart';
-import 'package:patient_analytics_flutter/views/form/integer_form_field.dart';
+import 'package:patient_analytics_flutter/components/form/integer_form_field.dart';
 
 class PatientBloodPressureForm extends StatefulWidget {
   const PatientBloodPressureForm({super.key, required this.onSubmit});

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
+import 'package:patient_analytics_flutter/extensions/text.dart';
 import 'package:patient_analytics_flutter/models/patient_payload.dart';
 import 'package:patient_analytics_flutter/providers/doctor_dashboard_provider.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
@@ -45,11 +46,7 @@ class PatientEditPage extends StatelessWidget {
               ),
               Text(
                 'Edit Patient Information',
-                style: TextStyle(
-                  color: Colors.cyan.shade700,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20,
-                ),
+                style: context.title.secondary,
               ),
             ],
           )),
