@@ -7,6 +7,7 @@ import 'package:patient_analytics_flutter/providers/doctor_dashboard_provider.da
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/forms/patient_form.dart';
+import 'package:patient_analytics_flutter/views/patient/patient_scaffold.dart';
 
 class PatientEditPage extends StatelessWidget {
   const PatientEditPage({super.key, required this.id});
@@ -35,32 +36,36 @@ class PatientEditPage extends StatelessWidget {
       });
     }
 
-    return Scaffold(
-      appBar: AppBar(
+    return PatientScaffold(
+      id: id,
+      provider: patientDetailsProvider,
+      appBar: (patient) {
+        return AppBar(
           backgroundColor: Theme.of(context).colorScheme.inversePrimary,
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                '${patientDetailsProvider.patient.firstName} ${patientDetailsProvider.patient.lastName}',
+                '${patient.firstName} ${patient.lastName}',
               ),
               Text(
                 'Edit Patient Information',
                 style: context.title.secondary,
               ),
             ],
-          )),
-      body: ListView(
-        scrollDirection: Axis.vertical,
-        shrinkWrap: true,
-        primary: false,
-        children: <Widget>[
-          PatientForm(
-            patient: patientDetailsProvider.patient,
-            onSubmit: onSubmit,
           ),
-        ],
-      ),
+        );
+      },
+      body: (patient) {
+        return ListView(
+          scrollDirection: Axis.vertical,
+          shrinkWrap: true,
+          primary: false,
+          children: <Widget>[
+            PatientForm(patient: patient, onSubmit: onSubmit),
+          ],
+        );
+      },
     );
   }
 }

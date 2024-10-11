@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_modular/flutter_modular.dart';
 import 'package:patient_analytics_flutter/models/patient.dart';
 import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure.dart';
 

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
@@ -8,6 +8,7 @@ import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_p
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/forms/patient_blood_pressure_form.dart';
+import 'package:patient_analytics_flutter/views/patient/patient_scaffold.dart';
 import 'package:patient_analytics_flutter/views/patient/tables/patient_blood_pressures_table.dart';
 
 class PatientBloodPressuresPage extends StatelessWidget {
@@ -65,28 +66,33 @@ class PatientBloodPressuresPage extends StatelessWidget {
       );
     }
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: SizedBox(
-          width: double.maxFinite,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(
-                '${provider.patient.firstName} ${provider.patient.lastName}',
-                style: context.title.navHeader,
-              ),
-              Text(
-                'Blood Pressure Records',
-                style: context.title.navSecondary,
-              ),
-            ],
+    return PatientScaffold(
+      id: id,
+      provider: provider,
+      appBar: (patient) {
+        return AppBar(
+          backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: SizedBox(
+            width: double.maxFinite,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text(
+                  '${patient.firstName} ${patient.lastName}',
+                  style: context.title.navHeader,
+                ),
+                Text(
+                  'Blood Pressure Records',
+                  style: context.title.navSecondary,
+                ),
+              ],
+            ),
           ),
-        ),
-      ),
-      body: PatientBloodPressuresTable(entries: provider.bloodPressures),
-      floatingActionButton: FloatingActionButton(
+        );
+      },
+      body: (patient) =>
+          PatientBloodPressuresTable(entries: provider.bloodPressures),
+      floatingActionButton: (_) => FloatingActionButton(
         onPressed: revealEntryForm,
         shape: const CircleBorder(),
         tooltip: 'Edit',
