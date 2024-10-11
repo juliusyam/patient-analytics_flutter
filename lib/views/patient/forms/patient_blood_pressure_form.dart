@@ -6,7 +6,6 @@ import 'package:patient_analytics_flutter/components/form/integer_form_field.dar
 class PatientBloodPressureForm extends StatefulWidget {
   const PatientBloodPressureForm({super.key, required this.onSubmit});
 
-  // TODO: Check bug on Android sending 0, 0
   final ValueChanged<PatientBloodPressurePayload> onSubmit;
 
   @override
@@ -17,10 +16,10 @@ class PatientBloodPressureForm extends StatefulWidget {
 class PatientBloodPressureFormState extends State<PatientBloodPressureForm> {
   final formKey = GlobalKey<FormState>();
 
+  final payload = PatientBloodPressurePayload();
+
   @override
   Widget build(BuildContext context) {
-    final payload = PatientBloodPressurePayload();
-
     final localisations = AppLocalizations.of(context)!;
 
     return Form(

@@ -61,7 +61,7 @@ class DoctorDashboardState extends State<DoctorDashboardPage> {
           patient: patient,
           onTap: () {
             // TODO: Pass patient into PatientDetailsProvider
-            Modular.to.pushNamed('/doctor-dashboard/patient/${patient.id}');
+            Modular.to.pushNamed('/doctor-dashboard/patient/${patient.id}', arguments: patient);
           },
         ),
       ));

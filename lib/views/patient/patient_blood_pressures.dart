@@ -15,7 +15,6 @@ class PatientBloodPressuresPage extends StatelessWidget {
 
   final String id;
 
-
   @override
   Widget build(BuildContext context) {
     final localisations = AppLocalizations.of(context)!;
@@ -25,8 +24,8 @@ class PatientBloodPressuresPage extends StatelessWidget {
     final ApiService apiService = Get.put(ApiService());
 
     void onSubmit(PatientBloodPressurePayload payload) async {
-      final result = await apiService.addPatientBloodPressure(
-          int.parse(id), payload);
+      final result =
+          await apiService.addPatientBloodPressure(int.parse(id), payload);
 
       result.when((data) {
         provider.addBloodPressureEntry(data);
@@ -40,23 +39,27 @@ class PatientBloodPressuresPage extends StatelessWidget {
     void revealEntryForm() {
       showModalBottomSheet(
         context: context,
+        isScrollControlled: true,
         builder: (_) {
-          return Wrap(
-            children: [
-              Container(
-                padding: const EdgeInsets.all(20.0),
-                child: Column(
-                  children: <Widget>[
-                    PatientBloodPressureForm(onSubmit: onSubmit),
-                    const SizedBox(height: 10),
-                    ElevatedButton(
-                      onPressed: () => Navigator.pop(context),
-                      child: Text(localisations.button_close),
-                    ),
-                  ],
-                ),
+          return SingleChildScrollView(
+            child: Container(
+              padding: EdgeInsets.only(
+                top: 20.0,
+                left: 20.0,
+                right: 20.0,
+                bottom: MediaQuery.of(context).viewInsets.bottom,
               ),
-            ],
+              child: Column(
+                children: <Widget>[
+                  PatientBloodPressureForm(onSubmit: onSubmit),
+                  const SizedBox(height: 10),
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: Text(localisations.button_close),
+                  ),
+                ],
+              ),
+            ),
           );
         },
       );

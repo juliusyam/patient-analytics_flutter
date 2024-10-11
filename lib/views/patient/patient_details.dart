@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/extensions/text.dart';
+import 'package:patient_analytics_flutter/models/patient.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_fetch_container.dart';
@@ -10,9 +11,10 @@ import 'package:patient_analytics_flutter/views/patient/patient_hero.dart';
 import 'package:patient_analytics_flutter/views/patient/tables/patient_blood_pressures_table.dart';
 
 class PatientDetailsPage extends StatefulWidget {
-  const PatientDetailsPage({super.key, required this.id});
+  const PatientDetailsPage({super.key, required this.id, this.initialPatient});
 
   final String id;
+  final Patient? initialPatient;
 
   @override
   PatientDetailsState createState() => PatientDetailsState();
@@ -54,6 +56,7 @@ class PatientDetailsState extends State<PatientDetailsPage> {
         ),
       ),
       body: PatientFetchContainer(
+        initialPatient: widget.initialPatient,
         provider: patientDetailsProvider,
         child: (patient) {
           return Column(

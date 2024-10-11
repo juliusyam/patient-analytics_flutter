@@ -58,7 +58,13 @@ class PatientModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    r.child('/:id', child: (_) => PatientDetailsPage(id: r.args.params['id']));
+    r.child(
+      '/:id',
+      child: (_) => PatientDetailsPage(
+        id: r.args.params['id'],
+        initialPatient: r.args.data,
+      ),
+    );
     r.child('/:id/edit',
         child: (_) => PatientEditPage(id: r.args.params['id']));
     r.child('/:id/blood-pressures',
