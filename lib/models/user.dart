@@ -43,7 +43,7 @@ class User {
         User(
           id: id,
           username: username,
-          role: role.toEnum(),
+          role: role.toRoleEnum(),
           dateOfBirth: DateTime.parse(dateOfBirth),
           gender: gender,
           firstName: firstName,

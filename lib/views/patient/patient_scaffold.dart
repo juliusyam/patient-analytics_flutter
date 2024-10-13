@@ -40,7 +40,12 @@ class _PatientScaffoldState extends State<PatientScaffold> {
         result.when((data) {
           setState(() {
             widget.provider.updatePatientDetails(data.extractPatient());
-            widget.provider.populateMetrics(data.bloodPressures);
+            widget.provider.populateMetrics(
+              data.bloodPressures,
+              data.heights,
+              data.temperatures,
+              data.weights,
+            );
           });
         }, (error) {
           ScaffoldMessenger.of(context)
@@ -56,18 +61,21 @@ class _PatientScaffoldState extends State<PatientScaffold> {
         widget.provider.patientOrNull ?? widget.initialPatient;
 
     if (currentPatientState == null) {
-      return Container(
-        color: Colors.cyan.shade50,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const CircularProgressIndicator(),
-            const SizedBox(height: 20),
-            Text(
-              'Fetching patient...',
-              style: Theme.of(context).textTheme.titleLarge,
-            ),
-          ],
+      return Scaffold(
+        body: Container(
+          color: Colors.cyan.shade50,
+          width: double.maxFinite,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const CircularProgressIndicator(),
+              const SizedBox(height: 20),
+              Text(
+                'Fetching patient...',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+            ],
+          ),
         ),
       );
     }

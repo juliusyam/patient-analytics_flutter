@@ -3,28 +3,28 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:intl/intl.dart';
 import 'package:patient_analytics_flutter/components/table/table_cell_container.dart';
 import 'package:patient_analytics_flutter/extensions/text.dart';
-import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure.dart';
+import 'package:patient_analytics_flutter/models/patient_metrics/patient_temperature.dart';
 
-class PatientBloodPressuresTable extends StatelessWidget {
-  const PatientBloodPressuresTable({
+class PatientTemperaturesTable extends StatelessWidget {
+  const PatientTemperaturesTable({
     super.key,
     required this.entries,
     this.limit,
   });
 
-  final List<PatientBloodPressure> entries;
+  final List<PatientTemperature> entries;
   final int? limit;
 
   @override
   Widget build(BuildContext context) {
-    Iterable<PatientBloodPressure> finalizedEntries =
+    Iterable<PatientTemperature> finalizedEntries =
         (limit != null) ? entries.take(limit!) : entries;
 
     final localisations = AppLocalizations.of(context)!;
 
-    List<TableRow> bloodPressureWidgets = [];
+    List<TableRow> temperatureWidgets = [];
     for (var entry in finalizedEntries) {
-      bloodPressureWidgets.add(
+      temperatureWidgets.add(
         TableRow(children: <TableCellContainer>[
           TableCellContainer(
             child: Text(
@@ -34,19 +34,19 @@ class PatientBloodPressuresTable extends StatelessWidget {
           ),
           TableCellContainer(
             child: Text(
-              entry.bloodPressureSystolicFormatted,
+              entry.temperatureCelsiusFormatted,
               style: context.body.regular,
             ),
           ),
           TableCellContainer(
             child: Text(
-              entry.bloodPressureDiastolicFormatted,
+              entry.temperatureFahrenheitFormatted,
               style: context.body.regular,
             ),
           ),
           TableCellContainer(
             child: Text(
-              entry.status,
+              "${entry.doctor?.firstName} ${entry.doctor?.lastName}",
               style: context.body.regular,
             ),
           ),
@@ -55,7 +55,7 @@ class PatientBloodPressuresTable extends StatelessWidget {
     }
 
     return Hero(
-      tag: 'patient-blood-pressures-table',
+      tag: 'patient-temperatures-table',
       transitionOnUserGestures: true,
       child: Table(
         border: TableBorder.all(),
@@ -76,24 +76,24 @@ class PatientBloodPressuresTable extends StatelessWidget {
             ),
             TableCellContainer(
               child: Text(
-                localisations.table_header_sys,
+                localisations.table_header_celsius,
                 style: context.body.regular,
               ),
             ),
             TableCellContainer(
               child: Text(
-                localisations.table_header_dia,
+                localisations.table_header_fahrenheit,
                 style: context.body.regular,
               ),
             ),
             TableCellContainer(
               child: Text(
-                localisations.table_header_status,
+                localisations.table_header_entry_creator,
                 style: context.body.regular,
               ),
             ),
           ]),
-          ...bloodPressureWidgets,
+          ...temperatureWidgets,
         ],
       ),
     );

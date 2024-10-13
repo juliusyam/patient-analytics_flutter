@@ -1,20 +1,24 @@
+import 'package:patient_analytics_flutter/models/user.dart';
+
 class PatientBloodPressure {
   final int id;
   final int patientId;
   final int doctorId;
   final DateTime dateCreated;
-  final int bloodPressureSystolic;
-  final int bloodPressureDiastolic;
+  final String bloodPressureSystolicFormatted;
+  final String bloodPressureDiastolicFormatted;
   final String status;
+  final User? doctor;
 
   const PatientBloodPressure({
     required this.id,
     required this.patientId,
     required this.doctorId,
     required this.dateCreated,
-    required this.bloodPressureSystolic,
-    required this.bloodPressureDiastolic,
+    required this.bloodPressureSystolicFormatted,
+    required this.bloodPressureDiastolicFormatted,
     required this.status,
+    this.doctor,
   });
 
   factory PatientBloodPressure.fromJson(Map<String, dynamic> responseBody) {
@@ -24,18 +28,20 @@ class PatientBloodPressure {
         'patientId': int patientId,
         'doctorId': int doctorId,
         'dateCreated': String dateCreated,
-        'bloodPressureSystolic': int bloodPressureSystolic,
-        'bloodPressureDiastolic': int bloodPressureDiastolic,
+        'bloodPressureSystolicFormatted': String bloodPressureSystolicFormatted,
+        'bloodPressureDiastolicFormatted': String bloodPressureDiastolicFormatted,
         'status': String status,
+        'doctor': Map<String, dynamic>? doctor,
       } =>
         PatientBloodPressure(
           id: id,
           patientId: patientId,
           doctorId: doctorId,
           dateCreated: DateTime.parse(dateCreated),
-          bloodPressureSystolic: bloodPressureSystolic,
-          bloodPressureDiastolic: bloodPressureDiastolic,
+          bloodPressureSystolicFormatted: bloodPressureSystolicFormatted,
+          bloodPressureDiastolicFormatted: bloodPressureDiastolicFormatted,
           status: status,
+          doctor: (doctor != null) ? User.fromJson(doctor) : null,
         ),
       _ =>
         throw const FormatException('Failed to convert PatientBloodPressure'),

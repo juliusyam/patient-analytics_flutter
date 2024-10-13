@@ -1,8 +1,8 @@
 import 'dart:convert';
 
 class PatientBloodPressurePayload {
-  int bloodPressureSystolic = 0;
-  int bloodPressureDiastolic = 0;
+  double bloodPressureSystolic = 0.0;
+  double bloodPressureDiastolic = 0.0;
 
   String toJson() {
     return jsonEncode({

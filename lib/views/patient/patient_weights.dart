@@ -4,27 +4,26 @@ import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 import 'package:get/get.dart';
 import 'package:patient_analytics_flutter/extensions/text.dart';
-import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure.dart';
-import 'package:patient_analytics_flutter/models/patient_metrics/patient_blood_pressure_payload.dart';
+import 'package:patient_analytics_flutter/models/patient_metrics/patient_weight.dart';
+import 'package:patient_analytics_flutter/models/patient_metrics/patient_weight_payload.dart';
 import 'package:patient_analytics_flutter/providers/patient_details_provider.dart';
 import 'package:patient_analytics_flutter/services/api_service.dart';
-import 'package:patient_analytics_flutter/views/patient/forms/patient_blood_pressure_form.dart';
 import 'package:patient_analytics_flutter/views/patient/forms/patient_metrics_form_container.dart';
+import 'package:patient_analytics_flutter/views/patient/forms/patient_weight_form.dart';
 import 'package:patient_analytics_flutter/views/patient/patient_scaffold.dart';
-import 'package:patient_analytics_flutter/views/patient/tables/patient_blood_pressures_table.dart';
+import 'package:patient_analytics_flutter/views/patient/tables/patient_weights_table.dart';
 
-class PatientBloodPressuresPage extends StatefulWidget {
-  const PatientBloodPressuresPage({super.key, required this.id});
+class PatientWeightsPage extends StatefulWidget {
+  const PatientWeightsPage({super.key, required this.id});
 
   final String id;
 
   @override
-  State<PatientBloodPressuresPage> createState() =>
-      _PatientBloodPressuresState();
+  State<PatientWeightsPage> createState() => _PatientWeightsState();
 }
 
-class _PatientBloodPressuresState extends State<PatientBloodPressuresPage> {
-  List<PatientBloodPressure>? _currentEntriesState;
+class _PatientWeightsState extends State<PatientWeightsPage> {
+  List<PatientWeight>? _currentEntriesState;
 
   @override
   void initState() {
@@ -35,8 +34,7 @@ class _PatientBloodPressuresState extends State<PatientBloodPressuresPage> {
       final patientId = int.tryParse(widget.id);
 
       if (patientId != null) {
-        final result =
-            await apiService.getPatientBloodPressures(patientId);
+        final result = await apiService.getPatientWeights(patientId);
 
         result.when((data) {
           setState(() => _currentEntriesState = data);
@@ -56,14 +54,14 @@ class _PatientBloodPressuresState extends State<PatientBloodPressuresPage> {
 
     final ApiService apiService = Get.put(ApiService());
 
-    void onSubmit(PatientBloodPressurePayload payload) async {
-      final result = await apiService.addPatientBloodPressure(
+    void onSubmit(PatientWeightPayload payload) async {
+      final result = await apiService.addPatientWeight(
         int.parse(widget.id),
         payload,
       );
 
       result.when((data) {
-        provider.addBloodPressureEntry(data);
+        provider.addWeightEntry(data);
         _currentEntriesState?.insert(0, data);
         Navigator.pop(context);
       }, (error) {
@@ -78,7 +76,7 @@ class _PatientBloodPressuresState extends State<PatientBloodPressuresPage> {
         isScrollControlled: true,
         builder: (_) {
           return PatientMetricsFormContainer(
-            form: PatientBloodPressureForm(onSubmit: onSubmit),
+            form: PatientWeightForm(onSubmit: onSubmit),
           );
         },
       );
@@ -100,7 +98,7 @@ class _PatientBloodPressuresState extends State<PatientBloodPressuresPage> {
                   style: context.title.navHeader,
                 ),
                 Text(
-                  localisations.title_blood_pressure,
+                  localisations.title_weight,
                   style: context.title.navSecondary,
                 ),
               ],
@@ -112,8 +110,8 @@ class _PatientBloodPressuresState extends State<PatientBloodPressuresPage> {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         children: <Widget>[
-          PatientBloodPressuresTable(
-            entries: _currentEntriesState ?? provider.bloodPressures,
+          PatientWeightsTable(
+            entries: _currentEntriesState ?? provider.weights,
           ),
         ],
       ),
