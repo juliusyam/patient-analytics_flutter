@@ -60,5 +60,6 @@
   "button_reading_add": "Add Reading",
   "button_close": "Close",
   "button_entry_create": "Create Entry",
-  "button_view_more": "View more"
+  "button_view_more": "View more",
+  "button_report_download": "Download Report"
 }

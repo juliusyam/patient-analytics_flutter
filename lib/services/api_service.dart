@@ -1,5 +1,9 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:http/http.dart' as http;
 import 'package:multiple_result/multiple_result.dart';
 import 'package:patient_analytics_flutter/models/api_exception.dart';
 import 'package:patient_analytics_flutter/models/auth/login_payload.dart';
@@ -145,6 +149,28 @@ class ApiService extends GetConnect {
         final List<PatientWeight> data =
             list.map((item) => PatientWeight.fromJson(item)).toList();
         return Success(data);
+      } else {
+        return Error(ApiException(response.body));
+      }
+    } catch (e) {
+      return Error(ApiException(e));
+    }
+  }
+
+  Future<Result<Uint8List, ApiException>> getPatientReportById(
+      int patientId) async {
+    try {
+      String? token = box.read('token');
+
+      var response = await http.get(
+        Uri.parse('http://localhost:8080/api/patients/$patientId/report'),
+        headers: {
+          HttpHeaders.authorizationHeader: 'Bearer $token',
+        },
+      );
+
+      if (response.statusCode == 200) {
+        return Success(response.bodyBytes);
       } else {
         return Error(ApiException(response.body));
       }
